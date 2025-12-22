@@ -236,7 +236,7 @@ def worker_process_chunk(args):
 # ==========================================
 # 3. APP UI SETUP
 # ==========================================
-st.set_page_config(page_title="Opella Matcher V27", page_icon="🟢", layout="wide")
+st.set_page_config(page_title="Matcher", page_icon="🟢", layout="wide")
 
 st.markdown("""
     <style>
@@ -285,7 +285,7 @@ if 'match_criteria' not in st.session_state:
         {'id': 2, 'col_a': None, 'col_b': None, 'clean_type': 'address', 'algo': 'vn_address', 'weight': 1.0, 'blocking': False}
     ]
 
-st.markdown("# Opella. Matcher V27.")
+st.markdown("Matcher")
 
 # 1. UPLOAD
 with st.expander("📂 1. UPLOAD DATA", expanded=not st.session_state.data_loaded):
@@ -463,6 +463,7 @@ if st.session_state.data_loaded:
             
             buff = io.BytesIO()
             with pd.ExcelWriter(buff, engine='openpyxl') as writer: final_df.to_excel(writer, index=False)
-            st.download_button("Download Result", buff.getvalue(), "Opella_Matched_V27.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", type="primary")
+            st.download_button("Download Result", buff.getvalue(), "Matched.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", type="primary")
+
 
     st.markdown('</div>', unsafe_allow_html=True)
