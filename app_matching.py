@@ -15,56 +15,33 @@ from datetime import datetime
 st.set_page_config(page_title="Opella Matcher", page_icon="⚡", layout="wide")
 
 # Theme Colors
-PRIMARY_COLOR = "#042B0B"   # Bold Green
-BG_COLOR = "#F7EFE6"        # Warm White
-ACCENT_COLOR = "#CED5CE"    # 20% Green Tint
-HIGHLIGHT_COLOR = "#FF78D2" # Challenger Pink
-INFO_BG = "#E8F5E9"         # Light Green for Info Box
+PRIMARY_COLOR = "#042B0B"   
+BG_COLOR = "#F7EFE6"        
+ACCENT_COLOR = "#CED5CE"    
+HIGHLIGHT_COLOR = "#FF78D2" 
+INFO_BG = "#E8F5E9"         
 
 st.markdown(f"""
     <style>
     /* 1. RESET & BASICS */
-    .stApp {{
-        background-color: {BG_COLOR};
-        color: {PRIMARY_COLOR};
-        font-family: 'Inter', system-ui, sans-serif;
-    }}
-    
-    h1, h2, h3, h4, p, span, div, label, li {{
-        color: {PRIMARY_COLOR} !important;
-    }}
+    .stApp {{ background-color: {BG_COLOR}; color: {PRIMARY_COLOR}; font-family: 'Inter', system-ui, sans-serif; }}
+    h1, h2, h3, h4, p, span, div, label, li {{ color: {PRIMARY_COLOR} !important; }}
 
     /* 2. CONTAINERS */
     div[data-testid="stVerticalBlockBorderWrapper"], .opella-card {{
-        background-color: white;
-        border: 1px solid {ACCENT_COLOR};
-        border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(4, 43, 11, 0.05);
-        padding: 24px;
-        margin-bottom: 20px;
+        background-color: white; border: 1px solid {ACCENT_COLOR}; border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(4, 43, 11, 0.05); padding: 24px; margin-bottom: 20px;
     }}
     
     /* 3. BUTTONS */
     div.stButton > button[kind="primary"] {{
-        background-color: {PRIMARY_COLOR};
-        color: white !important;
-        border: none;
-        border-radius: 6px;
-        font-weight: 600;
-        height: 48px;
-        transition: all 0.2s;
+        background-color: {PRIMARY_COLOR}; color: white !important; border: none;
+        border-radius: 6px; font-weight: 600; height: 48px; transition: all 0.2s;
     }}
-    div.stButton > button[kind="primary"]:hover {{
-        opacity: 0.9;
-        box-shadow: 0 4px 12px rgba(4, 43, 11, 0.3);
-    }}
-    
+    div.stButton > button[kind="primary"]:hover {{ opacity: 0.9; box-shadow: 0 4px 12px rgba(4, 43, 11, 0.3); }}
     div.stButton > button[kind="secondary"] {{
-        background-color: white;
-        color: {PRIMARY_COLOR} !important;
-        border: 1px solid {PRIMARY_COLOR};
-        border-radius: 6px;
-        height: 48px;
+        background-color: white; color: {PRIMARY_COLOR} !important; border: 1px solid {PRIMARY_COLOR};
+        border-radius: 6px; height: 48px;
     }}
 
     /* 4. SLIDER & INPUTS */
@@ -72,51 +49,28 @@ st.markdown(f"""
     div[data-baseweb="slider"] > div > div {{ background-color: {ACCENT_COLOR} !important; height: 4px !important; }}
     div[data-baseweb="slider"] > div > div > div {{ background-color: {PRIMARY_COLOR} !important; }}
     div[role="slider"] {{
-        background-color: {HIGHLIGHT_COLOR} !important;
-        border: 2px solid {BG_COLOR} !important;
-        width: 18px !important; height: 18px !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        background-color: {HIGHLIGHT_COLOR} !important; border: 2px solid {BG_COLOR} !important;
+        width: 18px !important; height: 18px !important; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }}
     
-    /* 5. BLOCKING INFO BOX (NEW) */
+    /* 5. BLOCKING INFO BOX */
     .blocking-box {{
-        background-color: {INFO_BG};
-        border: 1px solid {PRIMARY_COLOR};
-        color: {PRIMARY_COLOR};
-        padding: 0px 15px;
-        border-radius: 6px;
-        font-size: 13px;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        height: 42px; /* Match height of inputs */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        background-color: {INFO_BG}; border: 1px solid {PRIMARY_COLOR}; color: {PRIMARY_COLOR};
+        padding: 0px 15px; border-radius: 6px; font-size: 13px; font-weight: 600;
+        display: flex; align-items: center; height: 42px; white-space: nowrap;
+        overflow: hidden; text-overflow: ellipsis;
     }}
 
     /* 6. STEP HEADERS */
     .step-header {{
-        font-size: 18px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 30px;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        border-bottom: 2px solid {ACCENT_COLOR};
-        padding-bottom: 8px;
+        font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+        margin-top: 30px; margin-bottom: 15px; display: flex; align-items: center;
+        border-bottom: 2px solid {ACCENT_COLOR}; padding-bottom: 8px;
     }}
     .step-number {{
-        background-color: {PRIMARY_COLOR};
-        color: white !important;
-        width: 28px; height: 28px;
-        border-radius: 6px;
-        display: flex; align-items: center; justify-content: center;
-        margin-right: 12px;
-        font-size: 14px;
-        font-weight: bold;
+        background-color: {PRIMARY_COLOR}; color: white !important; width: 28px; height: 28px;
+        border-radius: 6px; display: flex; align-items: center; justify-content: center;
+        margin-right: 12px; font-size: 14px; font-weight: bold;
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -136,19 +90,18 @@ def load_excel_file(uploaded_file, sheet_name):
 # ==========================================
 class SpecializedMatcher:
     def __init__(self):
-        self.addr_map = {
-            r'\bp\.?\s': 'phuong ', r'\bq\.?\s': 'quan ', r'\btp\.?\s': 'thanh pho ',   
-            r'\bt\.p\.?\s': 'thanh pho ', r'\btx\.?\s': 'thi xa ', r'\btt\.?\s': 'thi tran ',
-            r'\bh\.?\s': 'huyen ', r'\btinh\s': 'tinh ', r'\bduong\s': 'duong ', r'\bso\s': 'so ',
-        }
-        self.true_noise = [r'\bviet nam\b', r'\bvn\b', r'\baddress\b', r'\bdia chi\b', r'\bmoi\b', r'\bcu\b']
-        self.biz_noise = [
-            r'\bcong ty\b', r'\bcty\b', r'\btnhh\b', r'\bco phan\b', r'\bcp\b',
-            r'\bchi nhanh\b', r'\bho kinh doanh\b', r'\bhkd\b', r'\bnha thuoc\b', r'\bquay thuoc\b', 
-            r'\bnt\b', r'\bqt\b', r'\bduoc pham\b', r'\bpharmacy\b', r'\bmedicine\b', r'\bclinic\b',
-            r'\bquay\b', r'\bthuoc\b', r'\bprivate\b', r'\benterprise\b', r'\bdr\b', r'\bduoc\b', 
-            r'\btu nhan\b', r'\bprivate\b'
+        # COMPILED REGEX FOR SPEED AND SAFETY
+        self.true_noise = r'\b(viet nam|vn|address|dia chi|moi|cu)\b'
+        
+        # Bỏ đi các từ quá ngắn như 'nt', 'qt' để tránh xóa nhầm tên riêng
+        biz_words = [
+            r'cong ty', r'cty', r'tnhh', r'co phan', r'cp', r'chi nhanh', 
+            r'ho kinh doanh', r'hkd', r'nha thuoc tu nhan', r'nha thuoc', 
+            r'quay thuoc', r'duoc pham', r'pharmacy', r'medicine', r'clinic',
+            r'quay', r'thuoc', r'private', r'enterprise', r'dr', r'duoc', r'tu nhan'
         ]
+        self.biz_noise_pattern = r'\b(' + '|'.join(biz_words) + r')\b'
+        
         self.blocking_regex = [
             r'\b(thanh pho|tp|t\.p|tinh)\b', r'\b(quan|huyen|thi xa|thanh pho|tp|tx|q\.|h\.)\b', 
             r'\b(phuong|xa|thi tran|p\.|x\.|tt\.)\b', r'[^\w\s]' 
@@ -156,14 +109,16 @@ class SpecializedMatcher:
 
     def base_clean(self, text):
         if not isinstance(text, str): text = str(text)
-        if not text: return ""
+        if not text or str(text).lower() == 'nan': return ""
         text = unidecode(text).lower()
-        text = text.replace(",", " ").replace(".", " ").replace("-", " ").replace(";", " ")
+        # Chuyển các ký tự đặc biệt thành khoảng trắng
+        text = re.sub(r'[,\.\-\;\(\)\[\]]', ' ', text)
         return " ".join(text.split())
 
     def clean_business_name(self, text):
         text = self.base_clean(text)
-        for pattern in self.biz_noise: text = re.sub(pattern, "", text)
+        # Xóa noise 1 lần duy nhất bằng regex tổng hợp
+        text = re.sub(self.biz_noise_pattern, "", text)
         return " ".join(text.split())
 
     def clean_address_text(self, text):
@@ -172,19 +127,22 @@ class SpecializedMatcher:
             r'\b(phuong|p\.|p)\s+[a-z0-9]+\s?[a-z0-9]*', r'\b(quan|q\.|q)\s+[a-z0-9]+\s?[a-z0-9]*',    
             r'\b(thanh pho|tp|t\.p)\s+[a-z\s]+', r'\b(tinh)\s+[a-z\s]+', r'\b(to|khu)\s+[0-9]+[a-z]?'                  
         ]
-        for pattern in admin_patterns: text = re.sub(pattern, "", text)
-        for pattern in self.true_noise: text = re.sub(pattern, "", text)
+        for pattern in admin_patterns: 
+            text = re.sub(pattern, "", text)
+        text = re.sub(self.true_noise, "", text)
         text = re.sub(r'\b(duong|pho|so|lo|nha)\b', '', text)
         return " ".join(text.split())
     
     def normalize_for_blocking(self, text):
         text = self.base_clean(text)
-        for regex in self.blocking_regex: text = re.sub(regex, "", text)
+        for regex in self.blocking_regex: 
+            text = re.sub(regex, "", text)
         return " ".join(text.split())
 
     def calculate_score(self, val_a, val_b, algo_key):
+        # Đã bỏ chặn độ dài cực đoan. Chỉ trả về 0 nếu chuỗi rỗng hoàn toàn.
         if not val_a or not val_b: return 0
-        if len(val_a) < 2 or len(val_b) < 2: return 0
+        
         if algo_key == "vn_address":
             num_a = re.findall(r'\b\d+[a-z]?[\/-]?\d*', val_a)
             num_b = re.findall(r'\b\d+[a-z]?[\/-]?\d*', val_b)
@@ -193,8 +151,10 @@ class SpecializedMatcher:
                 if num_a[0] != num_b[0]: penalty = 0.5 
             s = fuzz.token_sort_ratio(val_a, val_b)
             return s * penalty
-        elif algo_key == "token_sort": return fuzz.token_sort_ratio(val_a, val_b)
-        elif algo_key == "token_set": return fuzz.token_set_ratio(val_a, val_b)
+        elif algo_key == "token_sort": 
+            return fuzz.token_sort_ratio(val_a, val_b)
+        elif algo_key == "token_set": 
+            return fuzz.token_set_ratio(val_a, val_b)
         return 0
 
 matcher = SpecializedMatcher()
@@ -209,7 +169,7 @@ def worker_process_chunk(args):
     active_criteria = [c for c in criteria if not c['blocking']]
     tot_w = sum(c['weight'] for c in active_criteria) or 1
     
-    use_blocking = blocking_config is not None
+    use_blocking = len(blocking_config) > 0
     
     all_b_indices = []
     if not use_blocking and b_data_dict:
@@ -251,6 +211,7 @@ def worker_process_chunk(args):
                 raw_b = b_data_dict[c['col_b']][ib] 
                 clean_type = c.get('clean_type', 'general')
                 val_a, val_b = "", ""
+                
                 if clean_type == 'biz_name':
                     val_a = matcher.clean_business_name(raw_a)
                     val_b = matcher.clean_business_name(raw_b)
@@ -260,17 +221,23 @@ def worker_process_chunk(args):
                 else:
                     val_a = matcher.base_clean(raw_a)
                     val_b = matcher.base_clean(raw_b)
+                    
                 s = matcher.calculate_score(val_a, val_b, c['algo'])
                 
                 if clean_type == 'address' and s >= addr_override_threshold: perfect_address_found = True
                 current_weighted_sum += s * c['weight']
-                if show_details: current_details[f"Score_{c['col_a']}"] = s
+                
+                if show_details: 
+                    current_details[f"Score_{c['col_a']}"] = s
+                    # Xuất text đã được clean ra để debug dễ dàng
+                    current_details[f"Cleaned_A_{c['col_a']}"] = val_a
+                    current_details[f"Cleaned_B_{c['col_b']}"] = val_b
             
             fin = 100 if perfect_address_found else current_weighted_sum / tot_w
             
             if fin > bst_sc:
                 bst_sc = fin; bst_ib = ib
-                if show_details: bst_details = current_details
+                if show_details: bst_details = current_details.copy()
                 if bst_sc == 100: break
 
         row_r['Matching_Score'] = round(bst_sc, 2) if bst_sc >= threshold else 0
@@ -295,7 +262,7 @@ ALGO_OPTIONS = {
     "Fuzzy: Token Sort": "token_sort",
     "Fuzzy: Token Set": "token_set"
 }
-# AUTO MAPPING
+
 AUTO_MAP_KEYWORDS = {
     'name': ['name', 'ten', 'khach hang', 'kh', 'partner', 'company', 'doi tac', 'doanh nghiep', 'nguoi mua'], 
     'address': ['dia chi', 'address', 'dc', 'location', 'noi sinh', 'ho khau', 'tru so'], 
@@ -331,27 +298,23 @@ if 'match_criteria' not in st.session_state:
 # ==========================================
 # 5. MAIN APP LAYOUT
 # ==========================================
-
 def main():
     st.markdown("<h1>Opella. Matcher</h1>", unsafe_allow_html=True)
-    st.caption("Professional Entity Resolution Engine | v27.2")
+    st.caption("Professional Entity Resolution Engine | v27.3 (Optimized Core) by Dat Ngo")
     
-    # --- USER GUIDE (HƯỚNG DẪN SỬ DỤNG) ---
     with st.expander("📖 HƯỚNG DẪN SỬ DỤNG (USER GUIDE)"):
         st.markdown("""
         ### Quy trình 3 bước chuẩn:
-        
         **Bước 1: Tải dữ liệu (Data)**
         * Upload file cần tìm vào **File A** và file gốc vào **File B**.
         
         **Bước 2: Cấu hình (Config)**
         * ✅ **Key (Blocking):** Tích vào đây nếu muốn dùng cột này để lọc nhóm (Ví dụ: Tỉnh/Thành phố).
-            * *Hiệu ứng:* Khi tích chọn, phần chỉnh Weight sẽ biến mất và thay bằng thông báo "Blocking Key". Cột này sẽ **không tham gia tính điểm**.
         * ⚖️ **Weight:** Kéo thanh trượt để chỉnh độ quan trọng (nếu không phải Blocking Key).
         
         **Bước 3: Chạy (Execution)**
         * Bấm **Start Matching** và chờ kết quả.
-        * Dữ liệu xuất ra sẽ kèm theo điểm số chi tiết từng trường.
+        * File kết quả giờ đây sẽ có thêm cột `Cleaned_A` và `Cleaned_B` để bạn kiểm tra thuật toán đã xử lý chuỗi như thế nào.
         """)
 
     # --- STEP 1: DATA SOURCE ---
@@ -403,32 +366,27 @@ def main():
                 st.markdown("<hr style='margin:10px 0; border-top:1px dashed #CED5CE;'>", unsafe_allow_html=True)
                 row = st.columns([0.6, 3, 3, 3, 0.5], vertical_alignment="center")
                 
-                # 1. Checkbox Key (Blocking)
                 is_blocking = row[0].checkbox("Key", key=f"bk_{i}", value=crit['blocking'], label_visibility="collapsed")
                 crit['blocking'] = is_blocking
                 
-                # 2. Column Selectors
                 idx_a = st.session_state.cols_a.index(crit['col_a']) if crit['col_a'] in st.session_state.cols_a else 0
                 crit['col_a'] = row[1].selectbox(f"A{i}", st.session_state.cols_a, key=f"ca_{i}", index=idx_a, label_visibility="collapsed")
                 
                 s_idx = 0
                 if crit['col_a']: s_idx = get_auto_index(crit['col_a'], st.session_state.cols_b)
                 curr_b = crit['col_b'] if crit['col_b'] in st.session_state.cols_b else st.session_state.cols_b[s_idx]
-                curr_idx = st.session_state.cols_b.index(curr_b)
+                curr_idx = st.session_state.cols_b.index(curr_b) if curr_b in st.session_state.cols_b else 0
                 crit['col_b'] = row[2].selectbox(f"B{i}", st.session_state.cols_b, key=f"cb_{i}", index=curr_idx, label_visibility="collapsed")
                 
-                # 3. Logic: Show Controls OR Blocking Info
                 with row[3]:
                     if is_blocking:
-                        # HIDE CONTROLS, SHOW INFO BOX
                         st.markdown(f"""
                         <div class="blocking-box">
                             🔒 BLOCKING KEY: Dùng để lọc nhóm, không tính điểm.
                         </div>
                         """, unsafe_allow_html=True)
-                        crit['weight'] = 0.0 # Force 0 weight internally
+                        crit['weight'] = 0.0
                     else:
-                        # SHOW CONTROLS
                         sub_row = st.columns([1.2, 1.8], vertical_alignment="center")
                         raw_algo = sub_row[0].selectbox(f"Al{i}", list(ALGO_OPTIONS.keys()), key=f"al_{i}", 
                                                     index=list(ALGO_OPTIONS.values()).index(crit['algo']) if crit['algo'] in ALGO_OPTIONS.values() else 0,
@@ -436,7 +394,6 @@ def main():
                         crit['algo'] = ALGO_OPTIONS[raw_algo]
                         crit['weight'] = sub_row[1].slider(f"W{i}", 0.0, 5.0, float(crit['weight']), 0.5, key=f"w_{i}", label_visibility="collapsed")
                 
-                # 4. Delete
                 if row[4].button("✕", key=f"del_{i}"): criteria_to_remove.append(i)
 
             if criteria_to_remove:
@@ -445,7 +402,7 @@ def main():
                 
             st.markdown("<br>", unsafe_allow_html=True)
             if st.button("+ Thêm tiêu chí (Add Rule)", type="secondary"):
-                st.session_state.match_criteria.append({'id': len(st.session_state.match_criteria)+1, 'col_a': None, 'col_b': None, 'clean_type': 'general', 'algo': 'token_sort', 'weight': 1.0, 'blocking': False})
+                st.session_state.match_criteria.append({'id': len(st.session_state.match_criteria)+1, 'col_a': None, 'col_b': None, 'clean_type': 'biz_name', 'algo': 'token_sort', 'weight': 1.0, 'blocking': False})
                 st.rerun()
 
     # --- STEP 3: EXECUTION ---
@@ -466,7 +423,7 @@ def main():
                 addr_override = st.slider("Ưu tiên địa chỉ (Override)", 90, 100, 100)
                 need_id_b = st.checkbox("Lấy thêm cột ID từ B")
                 col_id_b = st.selectbox("Chọn cột ID", st.session_state.cols_b) if need_id_b else None
-                show_details = st.checkbox("Hiện chi tiết điểm", value=True)
+                show_details = st.checkbox("Hiện chi tiết & Text Debug", value=True)
     
     # --- PROCESSING ---
     if start_btn:
@@ -496,7 +453,7 @@ def main():
                 if key not in b_blocking_map: b_blocking_map[key] = []
                 b_blocking_map[key].append(idx)
         else:
-            status_box.warning("⚠️ Đang chạy chế độ Full Scan (Không có Key chặn). Tốc độ sẽ chậm hơn.")
+            status_box.warning("⚠️ Đang chạy chế độ Full Scan (Không có Key chặn).")
         
         # 2. DISTRIBUTE & RUN
         status_box.write(f"🚀 Phân phối tác vụ cho {num_workers} nhân CPU...")
